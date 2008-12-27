@@ -1,0 +1,10 @@
+This is a small, fake bootstrap package that does the work of downloading
+the necessary tarballs for P4Python and installing them.
+
+This is meant to be installed from the Python Package Index using easy_install.
+A package for P4PythonInstaller will not actually be installed. Any error
+output claiming this is an empty or broken package should be ignored.
+
+Usage instructions:
+
+  $ sudo easy_install P4PythonInstaller
