@@ -14,7 +14,7 @@ p4api_version = "08.2"
 
 perforce_hostname = "ftp.perforce.com"
 perforce_path = "/perforce/r%s" % p4api_version
-p4python_path = "%s/tools" % perforce_path
+p4python_path = "%s/bin.tools" % perforce_path
 
 
 def download(paths):
