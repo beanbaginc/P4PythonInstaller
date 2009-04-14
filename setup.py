@@ -55,7 +55,7 @@ def get_p4api_path():
 
     if re.match("i\d86", arch):
         arch = "x86"
-    elif arch == "x86_64":
+    elif arch in ("x86_64", "amd64"):
         arch = "x86_64"
     else:
         sys.stderr.write("Unsupported system architecture: %s\n" % arch)
@@ -80,6 +80,18 @@ def get_p4api_path():
     elif osname == "Darwin":
         # XXX: "darwin" or "macosx" ?
         osname = "macosx104"
+    elif osname == "FreeBSD":
+        osname = "freebsd"
+        freebsd_ver = platform.release()
+        freebsd_major = int(freebsd_ver.split(".")[0])
+
+        if freebsd_major == 5:
+            osname += "54"
+        elif freebsd_major >= 6:
+            osname += "60"
+        else:
+            sys.stderr.write("Unsupported FreeBSD version: %s" % freebsd_ver)
+            sys.exit(1)
     else:
         # TODO: Should support Solaris/OpenSolaris
         sys.stderr.write("Unsupported operating system: %s" % osname)
