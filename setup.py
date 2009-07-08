@@ -41,7 +41,39 @@ def extract(filename):
     print "Extracting %s..." % filename
     tar = tarfile.open(filename, "r:gz")
     dirname = tar.getnames()[0].rstrip("/")
-    tar.extractall()
+
+    if hasattr(tar, "extractall"):
+        tar.extractall()
+    else:
+        # Simulate extractall
+
+        directories = []
+
+        for tarinfo in tar:
+            if tarinfo.isdir():
+                directories.append(tarinfo)
+                tarinfo = copy.copy(tarinfo)
+                tarinfo.mode = 0700
+
+            self.extract(tarinfo, path)
+
+        directories.sort(lambda a, b: cmp(a.name, b.name))
+        directories.reverse()
+
+        # Set correct owner, mtime and filemode on directories.
+        for tarinfo in directories:
+            dirpath = os.path.join(path, tarinfo.name)
+
+            try:
+                self.chown(tarinfo, dirpath)
+                self.utime(tarinfo, dirpath)
+                self.chmod(tarinfo, dirpath)
+            except ExtractError, e:
+                if self.errorlevel > 1:
+                    raise
+                else:
+                    print e
+
     tar.close()
 
     return dirname
