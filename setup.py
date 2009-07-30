@@ -56,19 +56,19 @@ def extract(filename):
                 tarinfo = copy.copy(tarinfo)
                 tarinfo.mode = 0700
 
-            self.extract(tarinfo, path)
+            tar.extract(tarinfo, ".")
 
         directories.sort(lambda a, b: cmp(a.name, b.name))
         directories.reverse()
 
         # Set correct owner, mtime and filemode on directories.
         for tarinfo in directories:
-            dirpath = os.path.join(path, tarinfo.name)
+            dirpath = tarinfo.name
 
             try:
-                self.chown(tarinfo, dirpath)
-                self.utime(tarinfo, dirpath)
-                self.chmod(tarinfo, dirpath)
+                tar.chown(tarinfo, dirpath)
+                tar.utime(tarinfo, dirpath)
+                tar.chmod(tarinfo, dirpath)
             except ExtractError, e:
                 if self.errorlevel > 1:
                     raise
