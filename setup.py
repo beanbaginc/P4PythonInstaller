@@ -113,6 +113,9 @@ def get_p4api_path():
     elif osname == "Darwin":
         # XXX: "darwin" or "macosx" ?
         osname = "macosx104"
+
+        if arch == 'x86_64':
+            arch = 'x86'
     elif osname == "FreeBSD":
         osname = "freebsd"
         freebsd_ver = platform.release()
