@@ -11,7 +11,7 @@ import tarfile
 import tempfile
 
 
-p4api_version = "08.2"
+p4api_version = "12.2"
 
 perforce_hostname = "ftp.perforce.com"
 perforce_path = "/perforce/r%s" % p4api_version
@@ -111,11 +111,7 @@ def get_p4api_path():
         print "http://public.perforce.com/guest/robert_cowham/perforce/API/python/index.html"
         sys.exit(1)
     elif osname == "Darwin":
-        # XXX: "darwin" or "macosx" ?
-        osname = "macosx104"
-
-        if arch == 'x86_64':
-            arch = 'x86'
+        osname = 'macosx105'
     elif osname == "FreeBSD":
         osname = "freebsd"
         freebsd_ver = platform.release()
