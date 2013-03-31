@@ -98,7 +98,7 @@ def get_p4api_path():
 
     if osname == "Linux":
         linuxver = platform.release()
-        if linuxver.startswith('2.6') or linuxver.startswith('3.0'):
+        if linuxver.startswith('2.6') or linuxver.startswith('3.'):
             osname = "linux26"
         elif linuxver.startswith("2.4"):
             osname = "linux24"
