@@ -1,0 +1,3 @@
+REVIEWBOARD_URL = "https://reviews.reviewboard.org/"
+REPOSITORY = "P4PythonInstaller"
+BRANCH = "master"
