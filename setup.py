@@ -11,7 +11,7 @@ import tarfile
 import tempfile
 
 
-p4api_version = "12.2"
+p4api_version = "14.1"
 
 perforce_hostname = "ftp.perforce.com"
 perforce_path = "/perforce/r%s" % p4api_version
