@@ -112,6 +112,18 @@ def get_p4api_path():
         sys.exit(1)
     elif osname == "Darwin":
         osname = 'macosx105'
+
+        osx_ver = platform.release()
+        osx_major = int(osx_ver.split('.')[0])
+
+        if osx_major == 13:
+            # OS X Mavericks introduced a warning in Clang that causes builds
+            # to fail because of incorrect arguments to `cc`. The common
+            # workaround for this is to use the ARCHFLAGS environment variable,
+            # but the P4Python installer overrides ARCHFLAGS, so instead we
+            # override CFLAGS.
+            os.environ['CFLAGS'] = \
+                '-Wno-error=unused-command-line-argument-hard-error-in-future'
     elif osname == "FreeBSD":
         osname = "freebsd"
         freebsd_ver = platform.release()
