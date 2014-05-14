@@ -168,15 +168,17 @@ def main():
 
     args = []
 
-#    for arg in sys.argv[1:]:
-#        if arg.startswith("bdist"):
-#            args.append("install")
-#        elif arg.
-#        else:
-#            args.append(arg)
-
-    p = subprocess.Popen([sys.executable, "setup.py", "install"])
+    p = subprocess.Popen([sys.executable, "setup.py", "build", "--ssl"])
     rc = p.wait()
+
+    if rc:
+        sys.stderr.write('Failed to execute setup.py build\n')
+    else:
+        p = subprocess.Popen([sys.executable, "setup.py", "install"])
+        rc = p.wait()
+
+        if rc:
+            sys.stderr.write('Failed to execute setup.py install\n')
 
     os.chdir(curdir)
 
