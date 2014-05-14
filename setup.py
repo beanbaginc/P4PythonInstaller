@@ -103,7 +103,7 @@ def get_p4api_path():
         elif linuxver.startswith("2.4"):
             osname = "linux24"
         else:
-            sys.stderr.write("Unsupported Linux version: %s" % linuxver)
+            sys.stderr.write("Unsupported Linux version: %s\n" % linuxver)
             sys.exit(1)
     elif osname == "Windows":
         # TODO: Download and run the Windows installer.
@@ -122,11 +122,11 @@ def get_p4api_path():
         elif freebsd_major >= 6:
             osname += "60"
         else:
-            sys.stderr.write("Unsupported FreeBSD version: %s" % freebsd_ver)
+            sys.stderr.write("Unsupported FreeBSD version: %s\n" % freebsd_ver)
             sys.exit(1)
     else:
         # TODO: Should support Solaris/OpenSolaris
-        sys.stderr.write("Unsupported operating system: %s" % osname)
+        sys.stderr.write("Unsupported operating system: %s\n" % osname)
         sys.exit(1)
 
     return "%s/bin.%s%s" % (perforce_path, osname, arch)
